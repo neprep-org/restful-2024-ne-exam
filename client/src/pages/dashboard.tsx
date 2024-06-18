@@ -50,9 +50,9 @@ const Dashboard = () => {
         <div className="h-[100%] w-[15%]"></div>
         <div className="w-full md:w-[85%] h-[100%] flex flex-col justify-center items-center">
           {/* Dashboard */}
-          <div className="flex w-[90%] flex-col min-[550px]:flex-row items-center justify-around  gap-4 p-4 mb-8 -fulflex">
+          <div className="flex w-[90%] flex-col min-[700px]:flex-row items-center justify-around  gap-4 p-4 mb-8 -fulflex">
             {/* Card 1 */}
-            <div className="flex flex-col items-center justify-center w-full p-6 bg-white rounded-lg shadow-md">
+            <div className="flex flex-col items-center justify-center w-full min-[700px]:w-[50%] p-6 bg-white rounded-lg shadow-md">
               <FaBook className="mb-4 text-4xl text-blue-500" />
               <p className="text-2xl font-bold min-[580px]:text-xl">
                 Book Types
