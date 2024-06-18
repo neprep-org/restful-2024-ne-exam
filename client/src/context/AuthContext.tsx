@@ -92,6 +92,7 @@ const AuthProvider = ({ children }: any) => {
 
   // Check if user is already logged in on initial render
   useEffect(() => {
+
     const storedUser = cookies.user ? cookies.user : null;
 
     if (storedUser) {

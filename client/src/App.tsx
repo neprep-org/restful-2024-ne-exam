@@ -27,7 +27,7 @@ function App() {
               <Dashboard />
             </ProtectedRoute>
           }
-        />
+      />
       </Routes>
       <ToastContainer
         position="top-center"

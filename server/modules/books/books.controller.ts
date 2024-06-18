@@ -93,17 +93,23 @@ export const getAllBooks = async (
     const skip = (Number(page) - 1) * Number(limit);
     const take = Number(limit);
 
-    const [books, totalBooks] = await BooksRepository.findAndCount({
+    const [books, totalBooksType] = await BooksRepository.findAndCount({
       skip,
       take,
     });
 
-    const totalPages = Math.ceil(totalBooks / parseInt(limit as string, 10));
+    const totalPages = Math.ceil(
+      totalBooksType / parseInt(limit as string, 10)
+    );
+
+    // calculate total books by taking their count into consideratoins
+    const totalBooks = books.reduce((acc, book) => acc + book.count, 0);
 
     return ApiResponse.success(
       res,
       {
         books,
+        totalBooksType,
         totalBooks,
         totalPages,
         currentPage: Number(page),

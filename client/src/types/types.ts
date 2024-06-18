@@ -46,3 +46,13 @@ export interface IPagination {
   total: number;
   onChange: (page: number) => void;
 }
+
+export type Book = {
+  id: number;
+  name: string;
+  author: string;
+  publisher: string;
+  publicationYear: number;
+  subject: string;
+  count: number;
+};

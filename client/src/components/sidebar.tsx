@@ -57,7 +57,7 @@ const SideBar = () => {
           alt="User's Avatar"
           className="h-24 w-24 rounded-full "
         />
-        <TruncatedText text={user.email} length={15} />
+        <TruncatedText text={user.firstName} length={15} />
         <IconContext.Provider value={{ size: "1.5em" }}>
           <button
             className={`w-full px-4 py-2 my-2 rounded bg-white text-primary hover:bg-slate-100 hover:cursor-pointer`}
