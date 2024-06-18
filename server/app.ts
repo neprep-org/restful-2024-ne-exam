@@ -15,8 +15,6 @@ dotenv.config();
 
 const app = express();
 
-const name = 10;
-
 // Middlewares
 app.use(express.json()); // for parsing application/json
 app.use(helmet()); // for security
