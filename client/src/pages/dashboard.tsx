@@ -3,17 +3,15 @@ import React, { useEffect, useState } from "react";
 import SideBar from "../components/sidebar";
 import { columns } from "../utils/faker";
 import Table, { Data } from "../components/table";
-import {
-  IoIosSpeedometer,
-  IoMdPeople,
-  IoIosNotifications,
-} from "react-icons/io";
+import { IoIosBook } from "react-icons/io";
 
 import showToast from "../utils/errorToasts";
 import axios from "axios";
 import { baseUrl } from "../utils/axios.util";
 import { useAuth } from "../context/AuthContext";
 import { DashboardProvider } from "../context/DashboardContext";
+import { FaBook } from "react-icons/fa";
+import { BiBook } from "react-icons/bi";
 
 const Dashboard = () => {
   const [books, setBooks] = useState<Data[]>();
@@ -47,31 +45,35 @@ const Dashboard = () => {
 
   return (
     <DashboardProvider>
-      <div className="flex flex-row w-full h-screen">
+      <div className="flex flex-row w-full h-scree">
         <SideBar />
         <div className="h-[100%] w-[15%]"></div>
-        <div className="w-[85%] h-[100%] flex flex-col justify-center items-center">
+        <div className="w-full md:w-[85%] h-[100%] flex flex-col justify-center items-center">
           {/* Dashboard */}
-          <div className="flex justify-around w-full mb-8">
+          <div className="flex w-[90%] flex-col min-[550px]:flex-row items-center justify-around  gap-4 p-4 mb-8 -fulflex">
             {/* Card 1 */}
-            <div className="flex flex-col items-center justify-center w-64 p-6 bg-white rounded-lg shadow-md">
-              <IoIosSpeedometer className="mb-4 text-4xl text-blue-500" />
-              <p className="text-2xl font-bold">Total Books Type</p>
+            <div className="flex flex-col items-center justify-center w-full p-6 bg-white rounded-lg shadow-md">
+              <FaBook className="mb-4 text-4xl text-blue-500" />
+              <p className="text-2xl font-bold min-[580px]:text-xl">
+                Book Types
+              </p>
               <p className="text-xl">{totalBooksType}</p>
             </div>
 
             {/* Card 2 */}
-            <div className="flex flex-col items-center justify-center w-64 p-6 bg-white rounded-lg shadow-md">
-              <IoMdPeople className="mb-4 text-4xl text-green-500" />
-              <p className="text-2xl font-bold">Total Books</p>
+            <div className="flex flex-col items-center justify-center w-full p-6 bg-white rounded-lg shadow-md">
+              <IoIosBook className="mb-4 text-4xl text-green-500" />
+              <p className="text-2xl font-bold min-[580px]:text-xl">
+                Total Books
+              </p>
               <p className="text-xl">{totalBooks}</p>
             </div>
 
             {/* Card 3 */}
-            <div className="flex flex-col items-center justify-center w-64 p-6 bg-white rounded-lg shadow-md">
-              <IoIosNotifications className="mb-4 text-4xl text-red-500" />
-              <p className="text-2xl font-bold">Available for lent</p>
-              <p className="text-xl">{totalBooks}</p>
+            <div className="flex flex-col items-center justify-center w-full p-6 bg-white rounded-lg shadow-md">
+              <BiBook className="mb-4 text-4xl text-red-500" />
+              <p className="text-2xl font-bold min-[580px]:text-xl">For rent</p>
+              <p className="text-xl">{totalBooks - totalBooksType}</p>
             </div>
           </div>
 

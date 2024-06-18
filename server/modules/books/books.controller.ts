@@ -73,7 +73,7 @@ export const addBook = async (
     return ApiResponse.success(
       res,
       { ...newBook },
-      "User created successfully",
+      "Book created successfully",
       201
     );
   } catch (error) {
@@ -96,6 +96,7 @@ export const getAllBooks = async (
     const [books, totalBooksType] = await BooksRepository.findAndCount({
       skip,
       take,
+      order: { updatedAt: "DESC" },
     });
 
     const totalPages = Math.ceil(
