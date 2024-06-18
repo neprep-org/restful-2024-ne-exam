@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { addBook } from "./books.controller";
+import { addBook, getAllBooks } from "./books.controller";
 import authMiddleware from "../../middlewares/auth.middleware";
 
 const router = Router();
@@ -10,5 +10,6 @@ router.use(authMiddleware);
 
 // protected routes
 router.post("/new", addBook);
+router.get("/all", getAllBooks);
 
 export default router;

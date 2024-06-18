@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import CreateBookValidationSchema from "./books.validations";
+import {
+  CreateBookValidationSchema,
+  GetAllBooksQueryValidationSchema,
+} from "./books.validations";
 import ApiResponse from "../../common/api_response";
 import BooksRepository from "./books.repository";
 
@@ -72,6 +75,41 @@ export const addBook = async (
       { ...newBook },
       "User created successfully",
       201
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAllBooks = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { page = 1, limit = 10000 } =
+      await GetAllBooksQueryValidationSchema.validateAsync(req.query);
+
+    const skip = (Number(page) - 1) * Number(limit);
+    const take = Number(limit);
+
+    const [books, totalBooks] = await BooksRepository.findAndCount({
+      skip,
+      take,
+    });
+
+    const totalPages = Math.ceil(totalBooks / parseInt(limit as string, 10));
+
+    return ApiResponse.success(
+      res,
+      {
+        books,
+        totalBooks,
+        totalPages,
+        currentPage: Number(page),
+      },
+      "All books fetched successfully",
+      200
     );
   } catch (error) {
     next(error);

@@ -11,4 +11,9 @@ const CreateBookValidationSchema = Joi.object({
   count: Joi.number().default(1).optional(),
 });
 
-export default CreateBookValidationSchema;
+const GetAllBooksQueryValidationSchema = Joi.object({
+  page: Joi.number().min(1).optional(),
+  limit: Joi.number().min(1).optional(),
+}).options({ abortEarly: false, allowUnknown: false });
+
+export { CreateBookValidationSchema, GetAllBooksQueryValidationSchema };
