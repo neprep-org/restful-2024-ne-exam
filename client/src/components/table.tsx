@@ -26,6 +26,11 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
     setTableData(data);
   }, [data]);
 
+  /**
+   * Takes table data and search query as an array
+   * Return filtered data based on the search query
+   * Search is performed on all columns
+   */
   const filteredData = useMemo(() => {
     if (!searchQuery) return tableData;
     return tableData.filter((row) =>
@@ -37,6 +42,11 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
     );
   }, [tableData, searchQuery, columns]);
 
+  /**
+   * Takes filtered data as an array
+   * Return all data from starting index up to the last page
+   * Start Index is always updated based on the current page
+   */
   const paginatedData = useMemo(() => {
     const startIndex = (currentPage - 1) * rowsPerPage;
     return filteredData.slice(startIndex, startIndex + rowsPerPage);
