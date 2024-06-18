@@ -10,6 +10,20 @@ export default class User {
     nullable: false,
     type: "varchar",
   })
+  firstName: string;
+
+  @Column({
+    length: 50,
+    nullable: false,
+    type: "varchar",
+  })
+  lastName: string;
+
+  @Column({
+    length: 50,
+    nullable: false,
+    type: "varchar",
+  })
   email: string;
 
   @Column({

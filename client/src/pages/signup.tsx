@@ -6,6 +6,8 @@ import Logo from "../components/logo";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const { signup, isLoading, user } = useAuth();
 
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await signup(email, password);
+    await signup(email, password, firstName, lastName);
   };
 
   return (
@@ -25,6 +27,32 @@ const SignUp = () => {
         <Logo />
         <h2 className="text-2xl text-center mt-[-6px] mb-8">Sign Up</h2>
         <div className="mb-4">
+          <div className=" flex flex-row items-center justify-between mb-6 gap-2">
+            <div>
+              <label htmlFor="firstName" className="block text-gray-700">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                className="w-full p-2 border border-gray-300 rounded mt-2 outline-none focus:border-primary"
+                required
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="firstName" className="block text-gray-700">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                className="w-full p-2 border border-gray-300 rounded mt-2 outline-none focus:border-primary"
+                required
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+          </div>
           <label htmlFor="email" className="block text-gray-700">
             Email
           </label>

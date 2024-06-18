@@ -8,6 +8,7 @@ import {
   CreateUserValidationSchema,
   UpdateUserValidationSchema,
   GetAllUsersQueryValidationSchema,
+  LoginValidationSchema,
 } from "./user.validations";
 
 import { AuthRequest } from "../../middlewares/auth.middleware";
@@ -18,9 +19,8 @@ export const signup = async (
   next: NextFunction
 ) => {
   try {
-    const { email, password } = await CreateUserValidationSchema.validateAsync(
-      req.body
-    );
+    const { email, password, firstName, lastName } =
+      await CreateUserValidationSchema.validateAsync(req.body);
 
     // check if user with provided email doesn't exist already.
     const userWithEmailExist = await UserRepository.existsBy({ email });
@@ -32,6 +32,8 @@ export const signup = async (
     const hashedPassword = await bcrypt.hash(password, 10); // hash the password
 
     const user = UserRepository.create({
+      firstName,
+      lastName,
       email,
       password: hashedPassword,
     });
@@ -45,14 +47,9 @@ export const signup = async (
     // remove password from the response
     newUser.password = "";
 
-    // generate jwt token
-    const token = await jwt.sign({ user: newUser }, process.env.JWT_SECRET!, {
-      expiresIn: process.env.JWT_EXPIRES_IN,
-    });
-
     return ApiResponse.success(
       res,
-      { ...newUser, token },
+      { ...newUser },
       "User created successfully",
       201
     );
@@ -204,12 +201,12 @@ export const login = async (
   next: NextFunction
 ) => {
   try {
-    const { email, password } = await CreateUserValidationSchema.validateAsync(
+    const { email, password } = await LoginValidationSchema.validateAsync(
       req.body
     );
 
     const user = await UserRepository.findOne({ where: { email } });
-
+    
     // check if user with provided email exists.
     if (!user) {
       return ApiResponse.error(res, "Invalid email or password", 400);

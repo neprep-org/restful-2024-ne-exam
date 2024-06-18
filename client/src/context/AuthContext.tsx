@@ -23,6 +23,8 @@ const AuthProvider = ({ children }: any) => {
         response = response.data;
 
         const loggedInUser = {
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
           email: response.data.email,
           id: response.data.id,
           token: response.data.token,
@@ -48,27 +50,25 @@ const AuthProvider = ({ children }: any) => {
     }
   };
 
-  const signup = async (email: string, password: string) => {
+  const signup = async (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ) => {
     try {
       setIsLoading(true);
-      let response: any = await axios.post("users/signup", { email, password });
+      let response: any = await axios.post("users/signup", {
+        email,
+        password,
+        firstName,
+        lastName,
+      });
 
       if (response.status === 201) {
         response = response.data;
-
-        const signedUpUser = {
-          email: response.data.email,
-          id: response.data.id,
-          token: response.data.token,
-        };
-
-        const expires = new Date(Date.now() + 1000 * 60 * 60); // Set cookie to expire in 1 hour
-
-        setCookie("user", JSON.stringify(signedUpUser), { path: "/", expires });
-        setUser(signedUpUser);
-
         showToast(response.message, "success");
-        navigate("/dashboard");
+        navigate("/signin"); // redirect to signin page after signup
       } else {
         showToast(response.data.message, "error");
       }
