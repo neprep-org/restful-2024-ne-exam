@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
-export default class User {
-  @PrimaryGeneratedColumn("uuid")
+@Entity({ name: "books" })
+export default class Book {
+  @PrimaryGeneratedColumn("increment")
   id: string;
 
   @Column({
@@ -27,11 +27,10 @@ export default class User {
   publisher: string;
 
   @Column({
-    length: 50,
     nullable: false,
-    type: "varchar",
+    type: "int",
   })
-  publicationYear: string;
+  publicationYear: number;
 
   @Column({
     length: 50,
@@ -39,4 +38,11 @@ export default class User {
     type: "varchar",
   })
   subject: string;
+
+  @Column({
+    nullable: false,
+    type: "int",
+    default: 1,
+  })
+  count: number;
 }

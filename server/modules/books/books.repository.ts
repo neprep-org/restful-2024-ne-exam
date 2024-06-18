@@ -1,6 +1,6 @@
 import AppDataSource from "../../db/data-source";
-import User from "./books.model";
+import Book from "./books.model";
 
-const BooksRepository = AppDataSource.getRepository(User);
+const BooksRepository = AppDataSource.getRepository(Book);
 
 export default BooksRepository;

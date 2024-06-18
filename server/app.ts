@@ -9,6 +9,7 @@ import { corsOptions } from "./common/app_constants";
 
 import usersRoutes from "./modules/users/user.routes";
 import errorMiddleware from "./middlewares/error.middleware";
+import booksRoutes from "./modules/books/books.routes";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(cors(corsOptions)); // for cross-origin resource sharing
 
 // Routes
 app.use("/users", usersRoutes);
+app.use("/books", booksRoutes);
 
 // Not Found Route
 app.use("*", async (req: Request, res: Response) => {

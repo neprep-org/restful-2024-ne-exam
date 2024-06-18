@@ -8,6 +8,7 @@ const CreateBookValidationSchema = Joi.object({
   publisher: Joi.string().min(2).max(50).required(),
   publicationYear: Joi.number().less(currentYear).greater(-5000).required(), // allow from current year back to 5000 years ago
   subject: Joi.string().max(50).required(),
+  count: Joi.number().default(1).optional(),
 });
 
 export default CreateBookValidationSchema;
