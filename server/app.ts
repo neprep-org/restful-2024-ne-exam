@@ -3,6 +3,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
 
 import ApiResponse from "./common/api_response";
 import { corsOptions } from "./common/app_constants";
@@ -10,6 +11,8 @@ import { corsOptions } from "./common/app_constants";
 import usersRoutes from "./modules/users/user.routes";
 import errorMiddleware from "./middlewares/error.middleware";
 import booksRoutes from "./modules/books/books.routes";
+
+import swagggerJsonDoc from "./swagger/swagger.json";
 
 dotenv.config();
 
@@ -20,6 +23,9 @@ app.use(express.json()); // for parsing application/json
 app.use(helmet()); // for security
 app.use(morgan("common")); // for logging
 app.use(cors(corsOptions)); // for cross-origin resource sharing
+
+// Documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swagggerJsonDoc));
 
 // Routes
 app.use("/users", usersRoutes);

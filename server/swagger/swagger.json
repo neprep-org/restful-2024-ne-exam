@@ -1,0 +1,196 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Restful 2024 National Exam",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication/Authorization Endpoints."
+    },
+    {
+      "name": "Books",
+      "description": "Books Endpoints."
+    }
+  ],
+  "paths": {
+    "users/signup": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "Sign up",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "users/login": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "Log in",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "books/new": {
+      "post": {
+        "tags": ["Books"],
+        "description": "Add a book",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "books/all": {
+      "get": {
+        "tags": ["Books"],
+        "description": "Get all books",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "gutsinda@nesa.gov.rw"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        }
+      },
+      "SignupDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Mugabo"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Javis"
+          },
+          "email": {
+            "type": "string",
+            "example": "gutsinda@nesa.gov.rw"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        }
+      },
+      "RegisterBook": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Node.js Guide"
+          },
+          "author": {
+            "type": "string",
+            "example": "MURANGWA Pacifique"
+          },
+          "publisher": {
+            "type": "string",
+            "example": "Coding Monsters"
+          },
+          "publicationYear": {
+            "type": "number",
+            "example": "1999"
+          },
+          "subject": {
+            "type": "string",
+            "example": "JavaScript"
+          },
+          "count": {
+            "type": "number",
+            "example": "10"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
