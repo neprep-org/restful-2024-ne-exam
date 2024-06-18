@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Modal from "./modal";
 
 type Column = {
@@ -6,7 +6,7 @@ type Column = {
   accessor: string;
 };
 
-type Data = {
+export type Data = {
   [key: string]: string | number | Date;
 };
 
@@ -20,7 +20,11 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
   const [rowsPerPage] = useState(7); // Default number of rows per page
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tableData, setTableData] = useState(data);
+  const [tableData, setTableData] = useState<Data[]>([]);
+
+  useEffect(() => {
+    setTableData(data);
+  }, [data]);
 
   const filteredData = useMemo(() => {
     if (!searchQuery) return tableData;
@@ -118,7 +122,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
         />
         <button
           onClick={() => setIsModalOpen(true)}
-          className="px-4 py-2 bg-green-500 text-white rounded text-sm"
+          className="px-4 py-2 text-sm text-white bg-green-500 rounded"
         >
           Add Entity
         </button>
@@ -130,61 +134,63 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
               {columns.map((column) => (
                 <th
                   key={column.accessor}
-                  className="py-6 px-8 border-b text-center border-primary-light border-opacity-50 text-gray-700 text-sm whitespace-nowrap"
+                  className="px-8 py-6 text-sm text-center text-gray-700 border-b border-opacity-50 border-primary-light whitespace-nowrap"
                 >
                   {column.Header}
                 </th>
               ))}
-              <th className="py-2 px-4 border-b text-center border-primary-light border-opacity-50 text-gray-700 text-sm whitespace-nowrap">
+              <th className="px-4 py-2 text-sm text-center text-gray-700 border-b border-opacity-50 border-primary-light whitespace-nowrap">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody>
-            {paginatedData.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {columns.map((column) => (
-                  <td
-                    key={column.accessor}
-                    className="py-2 px-4 border-b border-primary-light border-opacity-50 text-sm text-gray-700 whitespace-nowrap text-center"
-                  >
-                    {String(
-                      column.accessor === "createdAt"
-                        ? new Date(
-                            row[column.accessor] as string
-                          ).toLocaleDateString()
-                        : row[column.accessor]
-                    )}
+            {paginatedData.map((row, rowIndex) => {
+              return (
+                <tr key={rowIndex}>
+                  {columns.map((column) => (
+                    <td
+                      key={column.accessor}
+                      className="px-4 py-2 text-sm text-center text-gray-700 border-b border-opacity-50 border-primary-light whitespace-nowrap"
+                    >
+                      {String(
+                        column.accessor === "createdAt"
+                          ? new Date(
+                              row[column.accessor] as string
+                            ).toLocaleDateString()
+                          : row[column.accessor]
+                      )}
+                    </td>
+                  ))}
+                  <td className="px-4 py-2 text-sm border-b border-opacity-50 border-primary-light whitespace-nowrap">
+                    <div className="flex space-x-2">
+                      <button className="px-2 py-1 text-sm text-white rounded bg-primary-light">
+                        Update
+                      </button>
+                      <button className="px-2 py-1 text-sm text-white bg-orange-300 rounded">
+                        Delete
+                      </button>
+                    </div>
                   </td>
-                ))}
-                <td className="py-2 px-4 border-b border-primary-light border-opacity-50 text-sm whitespace-nowrap">
-                  <div className="flex space-x-2">
-                    <button className="px-2 py-1 bg-primary-light text-white rounded text-sm">
-                      Update
-                    </button>
-                    <button className="px-2 py-1 bg-orange-300 text-white rounded text-sm">
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
-      <div className=" flex justify-center items-center mt-8">
+      <div className="flex items-center justify-center mt-8 ">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-2 py-1 bg-white border border-primary rounded disabled:opacity-50 text-sm"
+          className="px-2 py-1 text-sm bg-white border rounded border-primary disabled:opacity-50"
         >
           Previous
         </button>
-        <div className="flex space-x-2 mx-4">{renderPagination()}</div>
+        <div className="flex mx-4 space-x-2">{renderPagination()}</div>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-2 py-1 bg-white border border-primary rounded disabled:opacity-50 text-sm"
+          className="px-2 py-1 text-sm bg-white border rounded border-primary disabled:opacity-50"
         >
           Next
         </button>

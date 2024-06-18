@@ -23,21 +23,21 @@ const SideBar = () => {
           <div className="border-t border-white w-[70%] mt-12 mb-6 opacity-50"></div>
         </div>
         <div className="flex flex-col items-center mt-12">
-          <div className=" flex flex-col justify-center items-center w-full">
+          <div className="flex flex-col items-center justify-center w-full ">
             <IconContext.Provider value={{ size: "1.5em" }}>
               <SideBarButton
                 isActive={activeButton === "Entity 1"}
                 onClick={() => handleButtonClick("Entity 1")}
               >
                 <FaUser className="inline mr-4" />
-                Users
+                Books
               </SideBarButton>
               <SideBarButton
                 isActive={activeButton === "Entity 2"}
                 onClick={() => handleButtonClick("Entity 2")}
               >
                 <FaChartBar className="inline mr-4" />
-                Statistics
+                Library
               </SideBarButton>
               <SideBarButton
                 isActive={activeButton === "Entity 3"}
@@ -55,7 +55,7 @@ const SideBar = () => {
         <img
           src={avatar}
           alt="User's Avatar"
-          className="h-24 w-24 rounded-full "
+          className="w-24 h-24 rounded-full "
         />
         <TruncatedText text={user.firstName} length={15} />
         <IconContext.Provider value={{ size: "1.5em" }}>

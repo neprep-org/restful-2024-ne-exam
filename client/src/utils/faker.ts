@@ -7,7 +7,6 @@ const generateColumns = () => {
     { Header: "PublicationYear", accessor: "publicationYear" },
     { Header: "Subject", accessor: "subject" },
     { Header: "Count", accessor: "count" },
-    // { Header: "Created At", accessor: "createdAt" },
   ];
 };
 
