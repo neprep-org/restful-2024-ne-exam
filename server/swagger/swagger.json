@@ -21,7 +21,7 @@
     }
   ],
   "paths": {
-    "users/signup": {
+    "/users/signup": {
       "post": {
         "tags": ["Auth"],
         "description": "Sign up",
@@ -36,14 +36,18 @@
             "description": "Internal Server Error"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupDto"
+              }
+            }
           }
-        ]
+        }
       }
     },
-    "users/login": {
+    "/users/login": {
       "post": {
         "tags": ["Auth"],
         "description": "Log in",
@@ -61,14 +65,18 @@
             "description": "Internal Server Error"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
           }
-        ]
+        }
       }
     },
-    "books/new": {
+    "/books/new": {
       "post": {
         "tags": ["Books"],
         "description": "Add a book",
@@ -86,6 +94,15 @@
             "description": "Internal Server Error"
           }
         },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterBook"
+              }
+            }
+          }
+        },
         "security": [
           {
             "bearerAuth": []
@@ -93,7 +110,7 @@
         ]
       }
     },
-    "books/all": {
+    "/books/all": {
       "get": {
         "tags": ["Books"],
         "description": "Get all books",
@@ -132,7 +149,8 @@
             "type": "string",
             "example": "password"
           }
-        }
+        },
+        "required": ["email", "password"]
       },
       "SignupDto": {
         "type": "object",
@@ -153,7 +171,8 @@
             "type": "string",
             "example": "password"
           }
-        }
+        },
+        "required": ["firstName", "lastName", "email", "password"]
       },
       "RegisterBook": {
         "type": "object",
@@ -171,18 +190,26 @@
             "example": "Coding Monsters"
           },
           "publicationYear": {
-            "type": "number",
-            "example": "1999"
+            "type": "integer",
+            "example": 1999
           },
           "subject": {
             "type": "string",
             "example": "JavaScript"
           },
           "count": {
-            "type": "number",
-            "example": "10"
+            "type": "integer",
+            "example": 10
           }
-        }
+        },
+        "required": [
+          "name",
+          "author",
+          "publisher",
+          "publicationYear",
+          "subject",
+          "count"
+        ]
       }
     },
     "securitySchemes": {
