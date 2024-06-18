@@ -1,0 +1,10 @@
+export const currentYear = new Date().getFullYear();
+export const currentMonth = new Date().getMonth() + 1;
+export const currentDay = new Date().getDate();
+export const currentHour = new Date().getHours();
+export const currentMinute = new Date().getMinutes();
+export const currentSecond = new Date().getSeconds();
+export const currentMillisecond = new Date().getMilliseconds();
+export const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+export const currentTime = `${currentHour}:${currentMinute}:${currentSecond}.${currentMillisecond}`;
+export const currentDateTime = `${currentDate} ${currentTime}`;
