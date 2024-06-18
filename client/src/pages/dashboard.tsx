@@ -52,7 +52,7 @@ const Dashboard = () => {
           {/* Dashboard */}
           <div className="flex w-[90%] flex-col min-[700px]:flex-row items-center justify-around  gap-4 p-4 mb-8 -fulflex">
             {/* Card 1 */}
-            <div className="flex flex-col items-center justify-center w-full min-[700px]:w-[50%] p-6 bg-white rounded-lg shadow-md">
+            <div className="flex flex-col items-center justify-center w-full max-[600px]:w-[60%] p-6 bg-white rounded-lg shadow-md">
               <FaBook className="mb-4 text-4xl text-blue-500" />
               <p className="text-2xl font-bold min-[580px]:text-xl">
                 Book Types
@@ -61,7 +61,7 @@ const Dashboard = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="flex flex-col items-center justify-center w-full p-6 bg-white rounded-lg shadow-md">
+            <div className="flex flex-col items-center justify-center w-full max-[600px]:w-[60%] p-6 bg-white rounded-lg shadow-md">
               <IoIosBook className="mb-4 text-4xl text-green-500" />
               <p className="text-2xl font-bold min-[580px]:text-xl">
                 Total Books
@@ -70,7 +70,7 @@ const Dashboard = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="flex flex-col items-center justify-center w-full p-6 bg-white rounded-lg shadow-md">
+            <div className="flex flex-col items-center justify-center w-full max-[600px]:w-[60%] p-6 bg-white rounded-lg shadow-md">
               <BiBook className="mb-4 text-4xl text-red-500" />
               <p className="text-2xl font-bold min-[580px]:text-xl">For rent</p>
               <p className="text-xl">{totalBooks - totalBooksType}</p>
@@ -78,7 +78,7 @@ const Dashboard = () => {
           </div>
 
           {/* Table */}
-          <div className="w-[90%]">
+          <div className="w-[90%] max-[600px]:w-[70%]">
             <Table data={books ?? []} columns={columns} />{" "}
           </div>
         </div>
