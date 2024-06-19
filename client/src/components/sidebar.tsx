@@ -49,7 +49,7 @@ const SideBar = () => {
             </IconContext.Provider>
           </div>
           <div className="border-t border-white w-[70%] mt-16 mb-6 opacity-50"></div>
-        </div>
+        </div> 
       </div>
       <div className="flex flex-col items-center">
         <img
